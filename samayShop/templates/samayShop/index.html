@@ -1,0 +1,135 @@
+{% extends 'samayShop/layout.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block title%} Home {% endblock%} 
+
+{% block content %}
+
+ <!--==========================
+Intro Section
+============================-->
+<section id="intro">
+<div class="intro-container">
+    <div class="carousel-item active" style="background-image: url('static/samayShop/img/banner/banner.jpeg');">
+    <div class="carousel-container">
+        <div class="carousel-content">
+        <p style="font-family:Big caslon; font-size: 350%"><span><i>Samay</i></span></p>
+        <p style="font-size: 200%; line-height: 150%; ">Somos el mapa del tesoro <span>que necesitas</span>, para conseguir <span>todas </span>las joyas, oro y plata que pueda<span> desear</span> tu alma pirata.</p>
+        <a href="#producto" class="btn-get-started scrollto" style="font-size: 150%">Descubre más</a>
+        </div>
+    </div>
+    </div>
+</div>
+</section><!-- #intro -->
+
+  <!-- Services Section Begin -->
+<section class="services spad">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <i class="fa fa-car"></i>
+                    <h6>Domicilio gratis</h6>
+                    <p>Por la compra de 2 o más accesorios</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <i class="fa fa-money"></i>
+                    <h6>Medios de pago</h6>
+                    <p>Efectivo</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <i class="fa fa-support"></i>
+                    <h6>Horarios de atención</h6>
+                    <p>Lunes a Sábado de
+                     10:00 am - 6:00 pm</p>
+                </div>
+            </div>
+                
+            </div>
+        </div>
+   
+</section>
+<!-- Services Section End -->
+
+
+<!-- Product Section Begin -->
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <div class="section-title">
+                    <h4 id="producto">Productos Recientes</h4>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <ul class="filter__controls">
+                    <li class="active" data-filter="*"><a class="text-reset" href="/?categoría=Todo">Todo</a></li>
+                    <!-- Colocar acá las categorías de manillas y pulseras -->
+                    {% for categoría in categorías %}
+                    <li data-filter="*"><a class="text-reset" href="/?categoría={{categoría}}">{{categoría}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="row property__gallery">
+            {% for producto in productos %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mix women">
+                <div class="product__item">
+                    <div class="product__item__pic set-bg" data-setbg="../../media/{{producto.img}}">
+                        <ul class="product__hover">
+                            <li><a href="../../media/{{producto.img}}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                            <li><a href="{% url 'detallesProducto' producto.identificador %}"><span class="icon_search"></span></a></li>
+                        </ul>
+                    </div>
+                    <div class="product__item__text">
+                        <h6 class="border-bottom pb-2 mb-1" ><a href="#">{{producto.nombre}}</a></h6>
+
+                        <div class="product__price pt-2">$ {{producto.precio | intcomma}}</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Product Section End -->
+
+<!-- Banner Section Begin -->
+<section class="banner set-bg" data-setbg="https://png.pngtree.com/png_detail/18/09/10/pngtree-vector-borders-png-clipart_3364091.jpg"> 
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-7 col-lg-8 m-auto">
+                <div class="banner__slider owl-carousel">
+                    <div class="banner__item">
+                        <div class="banner__text">
+
+                            <h1 style="font-size: 320%" >Los pequeños toques, son los que crean la diferencia. En nuestra tienda encontrarás los accesorios que te separaran del resto.</h1>
+                        </div>
+                    </div>
+                    <div class="banner__item">
+                        <div class="banner__text">
+                            <h1 style="font-size: 400%">Muestra tu lado más artístico, con nuestros accesorios únicos y hechos a mano.</h1>
+                        </div>
+                    </div>
+                    <div class="banner__item">
+                        <div class="banner__text">
+                            <span><b>Colecciones Favoritas</b></span>
+                            <h1>Encuentra aquí lo mejor para tu outfit</h1>
+                            <a href="{% url 'tienda' %}">Compra ahora</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Banner Section End -->
+
+
+{% endblock %}

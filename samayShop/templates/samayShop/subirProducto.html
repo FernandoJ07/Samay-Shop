@@ -1,0 +1,67 @@
+{% extends 'samayShop/layout.html' %}
+
+{% load static %}
+
+{% block title %} Subir Producto {% endblock %}
+
+{% block content %}
+
+<div class="container productoForm mb-5">
+    <h3 class="mt-5 pb-3 border-bottom text-center">Agregar Nuevo Producto</h3>
+    <form action="{% url 'subirProducto' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input class="w-100" autocomplete="off" type="text" name="nombre" placeholder="nombre">
+        <div class="d-flex ">
+            <select name="categorías" class="w-100" >
+                <option value="">Seleccione una categoría</option>
+                {% for categoría in categorías %}
+                    <option value="{{categoría}}">{{categoría}}</option>
+                {% endfor %}
+            </select>
+        
+            <button type="button" class="btnCategoría" data-bs-toggle="modal" data-bs-target="#exampleModal"> + </button>
+        </div>
+        
+        <input class="w-100" type="number" name="precio" placeholder="precio"><br>
+        <input class="w-100" type="file" name="img" id='img'><br>
+        <button class="btnSubmit" type="submit">Subir</button>
+    </form>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+            {% endfor %}
+        </ul>
+    {% endif %}
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Crear nueva categoría</h5>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">x</button>
+        </div>
+        <div class="modal-body">
+
+            <form action="{% url 'crearCategoría' %}" method="POST" class="form-group">
+                {% csrf_token %}
+                <input type="text" class="w-100" name="categoría" placeholder="Escriba una Categoría"> <br>
+                <div class="d-flex">    
+                    <button  class="btn btn-success" type="submit" >Crear</button>
+                    <button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+                
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{message}}
+    
+</div>
+
+
+{% endblock  %}

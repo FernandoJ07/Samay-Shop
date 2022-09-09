@@ -1,0 +1,141 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ashion Template">
+    <meta name="keywords" content="Ashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Css Styles -->
+
+    <link rel="stylesheet" href="{% static 'samayShop/css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'samayShop/css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'samayShop/css/elegant-icons.css'%}" type="text/css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="{% static 'samayShop/css/jquery-ui.min.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'samayShop/css/magnific-popup.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'samayShop/css/owl.carousel.min.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'samayShop/css/slicknav.min.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'samayShop/css/style.css' %}" type="text/css">
+
+    {% block style %}
+    {% endblock %}
+</head>
+
+<body>
+
+       <!-- Page Preloder -->
+       <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Offcanvas Menu Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="offcanvas__close">+</div>
+        <div class="offcanvas__logo text-center">
+            <a href="{% url 'index' %}"><img src="{% static 'samayShop/img/logo.png' %}" alt="logo empresa" width="80px" ></a>
+        </div>
+        <ul class="offcanvas__widget text-center">
+            {% if request.user.is_superuser %}
+                <li><a class="subirProducto" href="{% url 'subirProducto' %}">Subir Producto</a></li>
+            {% endif %}
+        </ul>
+        <div class="text-center" id="mobile-menu-wrap"></div>
+    </div>
+    <!-- Offcanvas Menu End -->
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container-fluid ">
+            <div class="row d-flex align-items-center">
+                <div class="col-xl-3 col-lg-2">
+                    <div class="header__logo">
+                        <a href="{% url 'index' %}"><img src="{% static 'samayShop/img/logo.png' %}" alt="logo empresa" width="70px"></a>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-7  text-center">
+                    <nav class="header__menu">
+                        <ul>
+                            <li class="active"><a href="{% url 'index' %}">Inicio</a></li>
+                            <li><a href="{% url 'tienda' %}">Tienda</a></li>
+                            <li><a href="{% url 'contacto' %}">Contactanos</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3">
+                    <div class="header__right  ">
+                        <ul class="header__right__widget d-flex justify-content-center align-items-center">
+                            <li><a href="{% url 'carrito' %}"><ion-icon style="font-size: 30px;" name="cart-outline"></ion-icon></a></li>
+                            {% if request.user.is_superuser %}
+                                <li><a class="subirProducto" href="{% url 'subirProducto' %}">Subir Producto</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="canvas__open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+
+    {% block content %} 
+    {% endblock %}
+
+     <!-- Footer Section Begin -->
+     <footer class="footer border-top pt-4 pb-4">
+        <div class="container">
+            <div class="row d-flex flex-column">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="footer__about">
+                        <div class="footer__logo text-center">
+                            <a href="./index.html"><img src="{% static 'samayShop/img/logo.png' %}" alt="logo empresa" width="150px"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="footer__social text-center">
+                        <a href="https://www.facebook.com/%F0%9D%95%8A%F0%9D%95%92%F0%9D%95%9E%F0%9D%95%92%F0%9D%95%AA-%F0%9D%95%92%F0%9D%95%94%F0%9D%95%94%F0%9D%95%96%F0%9D%95%A4%F0%9D%95%A0%F0%9D%95%A3%F0%9D%95%9A%F0%9D%95%A0%F0%9D%95%A4-109592838055287/" target="_blank"><i class="fa fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/samay_accesorios_/" target="_blank"><i class="fa fa-instagram"></i></a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Js Plugins -->
+    <script src="{% static 'samayShop/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'samayShop/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'samayShop/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'samayShop/js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'samayShop/js/mixitup.min.js' %}"></script>
+    <script src="{% static 'samayShop/js/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'samayShop/js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'samayShop/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'samayShop/js/jquery.nicescroll.min.js' %}"></script>
+    <script src="{% static 'samayShop/js/main.js' %}"></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    {% block js %}
+    {% endblock %}
+    </body>
+
+</html>

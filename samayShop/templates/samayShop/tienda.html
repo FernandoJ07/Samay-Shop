@@ -1,0 +1,131 @@
+{% extends 'samayShop/layout.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block title %} Tienda {% endblock %}
+
+{% block content %}
+    <!-- Shop Section Begin -->
+    <section class="shop spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="shop__sidebar">
+                        <div class="sidebar__categories">
+                            <div class="section-title">
+                                <h4>Categorias</h4>
+                            </div>
+                            <ul class="categorías d-flex flex-column">
+                                <li style='list-style: none;' class="active mb-2" data-filter="*"><a class="text-reset" href="?categoría=Todo">Todo</a></li>
+                                {% for categoría in categorías %}
+                                    <!-- Colocar acá las categorías de manillas y pulseras -->
+                                    <li style='list-style: none;' class="my-2" data-filter="*"><a class="text-reset" href="?categoría={{categoría}}">{{categoría}}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-9">
+                    <div class="row">
+                        {% for producto in page_obj %}
+                            <div class="col-lg-4 col-md-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="../../media/{{producto.img}}">
+                                        <ul class="product__hover">
+                                            <li><a href="../../media/{{producto.img}}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                            <li><a href="{% url 'detallesProducto' producto.identificador %}"><span class="icon_search"></span></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h6 class="border-bottom pb-2 mb-1" ><a href="#">{{producto.nombre}}</a></h6>
+                
+                                        <div class="product__price pt-2">$ {{producto.precio | intcomma}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        <div class="col-lg-12 text-center">
+                            <span class="pagination__option">
+
+                                {% if page_obj.has_previous %}
+                                    <a class="fa fa-angle-left" href="?page=1"></a>
+                                {% endif %}
+
+                                {% for pages in page_obj.paginator.page_range %}
+                                    <a href="?page={{pages}}">{{pages}}</a>
+                                {% endfor %}
+
+                        
+                                {% if page_obj.has_next %}
+                                    <a class="fa fa-angle-right" href="?page={{ page_obj.next_page_number }}"></a>
+                                {% endif %}
+
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shop Section End -->
+
+    <!-- Instagram Begin -->
+    <div class="instagram">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                    <div class="instagram__item set-bg" data-setbg="https://i.ibb.co/8MVshDB/Captura-web-20-11-2021-17159-www-instagram-com.jpg">
+                        <div class="instagram__text">
+                            <i class="fa fa-instagram"></i>
+                            <a href="https://www.instagram.com/p/CSI7R8Rs5kR/">@ Samay_accesorios_</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                    <div class="instagram__item set-bg" data-setbg="https://i.ibb.co/Jjfr0P1/Captura-web-20-11-2021-171216-www-instagram-com.jpg">
+                        <div class="instagram__text">
+                            <i class="fa fa-instagram"></i>
+                            <a href="https://www.instagram.com/p/CT8LMm7ltro/">@ Samay_accesorios_</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                    <div class="instagram__item set-bg" data-setbg="https://i.ibb.co/S7sBJNY/Captura-web-20-11-2021-17938-www-instagram-com.jpg">
+                        <div class="instagram__text">
+                            <i class="fa fa-instagram"></i>
+                            <a href="https://www.instagram.com/p/CVI6N1qlpRc/">@ Samay_accesorios_</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                    <div class="instagram__item set-bg" data-setbg="https://i.ibb.co/7K61LB2/Captura-web-20-11-2021-17631-www-instagram-com.jpg">
+                        <div class="instagram__text">
+                            <i class="fa fa-instagram"></i>
+                            <a href="https://www.instagram.com/p/CQ2lte_F9xc/">@ Samay_accesorios_</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                    <div class="instagram__item set-bg" data-setbg="https://i.ibb.co/s6MMyVz/Captura-web-20-11-2021-17227-www-instagram-com.jpg">
+                        <div class="instagram__text">
+                            <i class="fa fa-instagram"></i>
+                            <a href="https://www.instagram.com/p/CVI7FEPlnF4/">@ Samay_accesorios_</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                    <div class="instagram__item set-bg" data-setbg="https://i.ibb.co/Bzc9TyY/Collar.jpg">
+                        <div class="instagram__text">
+                            <i class="fa fa-instagram"></i>
+                            <a href="https://www.instagram.com/p/CTshsA5FFuZ/">@ Samay_accesorios_</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Instagram End -->
+
+{% endblock %}
