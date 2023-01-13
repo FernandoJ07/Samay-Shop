@@ -1,0 +1,59 @@
+{% extends 'samayShop/layout.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block title %} Carrito {% endblock %}
+
+
+{% block content %}
+
+    <div class="container mt-5 mb-5">
+        {% if request.session.cart.items %}
+            <table class="table">
+                <thead>
+                <tr class="text-center">
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col" >Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                    {% for value, key in request.session.cart.items %}
+                        <tr class="text-center">
+                            <td>{{key.nombre}}</td>
+                            <td>{{key.precio | intcomma }}</td>
+                            <td>{{key.cantidad}}</td>
+                            <td>
+                                <a class="btn btn-primary" href="{% url 'add' key.identificador%}">+</a>
+                                <a class="btn btn-secondary" href="{% url 'decrement' key.identificador%}">-</a>
+                                <a class="btn btn-danger" href="{% url 'delete' key.identificador %}">Eliminar</a>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+                </tbody>
+                <tfoot class="table-light">
+                    <tr>
+                        <td class="text-dark" style="text-align: end; padding-right: 9%; font-size: 25px;" colspan="4">Total: 
+                        <span style="font-weight: 600">{{total}}</span></td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div><a class="btn btn-white" style="background: #B695C0; color: white; font-weight: 450" href="{% url 'clear' %}">Limpiar</a></div>
+
+
+        {% else %}
+            <div class="alert alert-info text-center">Sin productos</div>
+        {% endif %}
+    </div>
+    
+
+
+
+
+
+{% endblock %}
+

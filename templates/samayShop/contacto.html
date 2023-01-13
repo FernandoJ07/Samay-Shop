@@ -1,0 +1,88 @@
+{% extends 'samayShop/layout.html' %}
+
+{% load static %}
+
+{% block title %} Contactenos {% endblock %}
+
+{% block content %}
+
+    <!-- Contact Section Begin -->
+    <section class="contact spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="contact__content">
+                        <div class="contact__address">
+                            <h5>Contactanos:</h5>
+                            <div class="container">
+                                <div>
+                                    <h6><i class="fa fa-map-marker"></i> Dirección</h6>
+                                    <p>Cl. 50 #12-2 a 12-90, Comuna 8, Cali, Valle del Cauca</p>
+                                </div>
+                                <div>
+                                    <h6><i class="fa fa-phone"></i> Teléfono</h6>
+                                    <p><span>304 456 85 12</span></p>
+                                </div>
+                                    
+                                <div>
+                                    <h6><i class="fa fa-headphones"></i> Correo electrónico</h6>
+                                    <p>samayshop@contact.com</p>
+                                </div>
+
+                            </div>
+  
+                        </div>
+                        <div class="contact__form">
+                            <h5>Enviar mensaje</h5>
+                            <form id='formContacto' action="https://formspree.io/f/mnqlewvv"  method="POST">
+                                {% csrf_token %}
+                                <input  type="text" name="name" autocomplete="off" placeholder="Nombre" required/>
+                                <input type="email" autocomplete="off"  name="email" placeholder="Correo electrónico" required/>
+                                <input type="text" autocomplete="off" name="subject" placeholder="Asunto" required/>
+                                <textarea  placeholder="Mensaje" required></textarea>
+                                <button class="site-btn">Enviar mensaje</button>
+                                <p class="mt-2" id="statusForm"></p>
+                            </form>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="contact__map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.593144581063!2d-76.50586868550917!3d3.448663645370849!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e30a7aca57afab9%3A0xae51b0a4655e4f61!2sCra.%2012%20%2348-89%20a%2048-3%2C%20Comuna%208%2C%20Cali%2C%20Valle%20del%20Cauca!5e0!3m2!1ses!2sco!4v1673622077143!5m2!1ses!2sco" width="600" height="750" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    
+    </section>
+<!-- Contact Section End -->
+
+
+<!-- Envío de formulario  -->
+<script>
+    document.getElementById('formContacto').addEventListener('submit', handleSubmit)
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+        var status = document.getElementById("statusForm");
+        var data = new FormData(this);
+        const response = await fetch(this.action, {
+            method: this.method,
+            body: data,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        if (response.ok){
+            status.innerHTML = "Gracias por su envío!";
+            this.reset()
+        }else{
+            status.innerHTML = "¡UPS! Hubo un problema al enviar su formulario"
+        }
+        
+    }
+</script>
+
+{% endblock  %}
