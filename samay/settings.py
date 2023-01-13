@@ -28,6 +28,7 @@ SECRET_KEY = 'django-insecure-xb66)+v+6yz@y1+i5bfnhk05(j8_$6rs@+i+lu#3ivi%x$@ds3
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://samay-shop-production.up.railway.app/', 'https://www.samay-shop-production.up.railway.app/']
 
 
 # Application definition
